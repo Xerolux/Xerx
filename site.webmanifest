@@ -1,0 +1,16 @@
+{
+  "name": "Xerx",
+  "short_name": "Xerx",
+  "description": "A clean and minimal WordPress theme for documenting your stream of life",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#eaeaea",
+  "theme_color": "#eaeaea",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}
