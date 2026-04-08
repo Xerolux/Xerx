@@ -1,5 +1,5 @@
 (function () {
-	const navBtn = document.getElementById('nav-switch');
+	const navBtn = document.getElementById('menu-toggle');
 	const menu = document.getElementById('site-navigation');
 
 	if (!navBtn || !menu) return;

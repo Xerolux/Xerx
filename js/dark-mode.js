@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 	if (!xerxTheme.enabled) return;
 
-	const toggle = document.getElementById('dark-mode-toggle');
+	const toggle = document.getElementById('theme-switch');
 	if (!toggle) return;
 
 	let storedPref = null;

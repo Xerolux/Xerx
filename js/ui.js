@@ -1,5 +1,5 @@
 (function () {
-	const topBtn = document.getElementById('scroll-top');
+	const topBtn = document.getElementById('back-to-top');
 	if (topBtn) {
 		topBtn.removeAttribute('hidden');
 
@@ -23,7 +23,7 @@
 
 			navigator.clipboard.writeText(link).then(() => {
 				const prev = el.getAttribute('aria-label');
-				el.setAttribute('aria-label', xerxUI.copied);
+				el.setAttribute('aria-label', xerxUi.copied);
 				setTimeout(() => {
 					el.setAttribute('aria-label', prev);
 				}, 2000);
