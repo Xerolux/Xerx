@@ -19,7 +19,7 @@ Xerx is a minimal yet extensive WordPress theme. It has different styles for pos
 ## Requirements
 
 * **PHP**: 7.4 or later
-* **WordPress**: 6.4 or later
+* **WordPress**: 6.4 or later (tested up to 7.0)
 
 ## Installation
 

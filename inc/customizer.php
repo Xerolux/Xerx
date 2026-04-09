@@ -6,11 +6,20 @@
  */
 
 function xerx_customize_register( $wp_customize ) {
-	$wp_customize->get_setting( 'blogname' )->transport          = 'postMessage';
-	$wp_customize->get_setting( 'blogdescription' )->transport   = 'postMessage';
-	$wp_customize->get_setting( 'header_textcolor' )->transport  = 'postMessage';
-	$wp_customize->get_setting( 'header_image' )->transport      = 'postMessage';
-	$wp_customize->get_setting( 'header_image_data' )->transport = 'postMessage';
+	$post_message_settings = array(
+		'blogname',
+		'blogdescription',
+		'header_textcolor',
+		'header_image',
+		'header_image_data',
+	);
+
+	foreach ( $post_message_settings as $setting_id ) {
+		$setting = $wp_customize->get_setting( $setting_id );
+		if ( $setting instanceof WP_Customize_Setting ) {
+			$setting->transport = 'postMessage';
+		}
+	}
 
 	$wp_customize->add_setting(
 		'header_bgcolor',
