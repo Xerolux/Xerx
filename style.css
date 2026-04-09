@@ -17,16 +17,22 @@ GitHub Theme URI: Xerolux/Xerx
 This theme, like WordPress, is licensed under the GPL.
 */
 :root {
-  --surface: #eaeaea;
-  --ink: #000000;
+  --surface: #fcfbf9;
+  --surface-alt: #f4efea;
+  --ink: #1d1d1b;
+  --muted: #5c5a56;
+  --accent: #6d3f3e;
+  --accent-cool: #355478;
+  --focus-ring: #1d4e89;
   --ghost: rgba( 255, 255, 255, 0.2 );
-  --mist: rgba( 255, 255, 255, 0.4 );
+  --mist: rgba( 29, 29, 27, 0.08 );
   --type-body: 'IBM Plex Serif', 'Garamond', 'Georgia', serif;
   --type-sans: 'IBM Plex Sans', 'Helvetica Neue', 'Helvetica', 'Nimbus Sans L', 'Arial', sans-serif;
   --type-heading: 'IBM Plex Sans Condensed', 'Roboto Condensed', 'HelveticaNeue-CondensedBold', 'Tahoma', sans-serif;
   --type-mono: 'IBM Plex Mono', 'Monaco', 'Consolas', monospace;
-  --measure: 640px;
-  --measure-lg: 960px;
+  --measure: 680px;
+  --measure-lg: 1120px;
+  --leading: 1.72;
   --speed: 333ms;
 }
 
@@ -38,24 +44,39 @@ html {
   font-family: var(--type-body);
   overflow-wrap: break-all;
   font-size: 18px;
-  line-height: 1.5rem;
+  line-height: var(--leading);
   background: var(--surface);
   color: var(--ink);
   transition: background-color var(--speed) ease, color var(--speed) ease;
 }
 
 a {
-  color: var(--ink);
+  color: var(--accent);
   transition: color var(--speed) ease, background-color var(--speed) ease;
 }
-a:focus {
-  background: var(--ink);
-  color: var(--surface);
-  outline: none;
+a:hover {
+  color: var(--accent-cool);
+}
+a:focus,
+a:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: 3px;
   text-decoration: none;
-  border-radius: 2px;
-  padding: 0 2px;
-  margin: 0 -2px;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+.wp-block-button__link:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: rgba( 53, 84, 120, 0.18 );
+  color: var(--ink);
 }
 
 .screen-reader-text {
@@ -726,13 +747,17 @@ a:focus {
   margin-right: 1rem;
 }
 .entry__body .wp-block-button__link {
-  background-color: var(--ink);
-  color: var(--surface);
-  border-radius: 0.5rem;
+  background-color: var(--accent-cool);
+  color: #ffffff;
+  border-radius: 999px;
   font-family: var(--type-sans);
-  text-transform: lowercase;
-  font-variant: small-caps;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-weight: 700;
   line-height: 100%;
+}
+.entry__body .wp-block-button__link:hover {
+  background-color: var(--ink);
 }
 .entry__body .is-style-outline .wp-block-button__link {
   border-radius: 0;
@@ -826,6 +851,24 @@ a:focus {
 .entry__body .has-brick-color {
   color: #825a58;
 }
+.entry__body .has-surface-color {
+  color: #fcfbf9;
+}
+.entry__body .has-surface-alt-color {
+  color: #f4efea;
+}
+.entry__body .has-text-color {
+  color: #1d1d1b;
+}
+.entry__body .has-muted-color {
+  color: #5c5a56;
+}
+.entry__body .has-accent-color {
+  color: #6d3f3e;
+}
+.entry__body .has-accent-cool-color {
+  color: #355478;
+}
 .entry__body .has-baby-pink-color {
   color: #e0bac0;
 }
@@ -858,6 +901,24 @@ a:focus {
 }
 .entry__body .has-brick-background-color {
   background-color: #825a58;
+}
+.entry__body .has-surface-background-color {
+  background-color: #fcfbf9;
+}
+.entry__body .has-surface-alt-background-color {
+  background-color: #f4efea;
+}
+.entry__body .has-text-background-color {
+  background-color: #1d1d1b;
+}
+.entry__body .has-muted-background-color {
+  background-color: #5c5a56;
+}
+.entry__body .has-accent-background-color {
+  background-color: #6d3f3e;
+}
+.entry__body .has-accent-cool-background-color {
+  background-color: #355478;
 }
 .entry__body .has-baby-pink-background-color {
   background-color: #e0bac0;
@@ -1156,4 +1217,80 @@ a:focus {
 }
 .wp-block-codemirror-blocks-code-block .CodeMirror-lines {
   padding: 0;
+}
+
+/* Custom block style variations. */
+.is-style-card-soft {
+  background: var(--surface-alt);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 2px rgba(17, 49, 24, 0.08), 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+.is-style-card-outline {
+  border: 1px solid rgba(29, 29, 27, 0.18);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+.is-style-quote-emphasis {
+  border-left: 4px solid var(--accent);
+  background: var(--surface-alt);
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+}
+.is-style-separator-fade {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(29, 29, 27, 0.24) 50%, transparent 100%);
+}
+.is-style-list-check {
+  list-style: none;
+  padding-left: 0;
+}
+.is-style-list-check li {
+  position: relative;
+  padding-left: 1.5rem;
+}
+.is-style-list-check li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent-cool);
+  font-weight: 700;
+}
+
+/* WooCommerce baseline integration. */
+.woocommerce ul.products li.product,
+.woocommerce-page ul.products li.product {
+  border-radius: 12px;
+  background: var(--surface-alt);
+  padding: 1rem;
+}
+.woocommerce a.button,
+.woocommerce button.button,
+.woocommerce input.button,
+.woocommerce #respond input#submit {
+  border-radius: 999px;
+  background: var(--accent-cool);
+  color: #ffffff;
+  font-family: var(--type-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.woocommerce a.button:hover,
+.woocommerce button.button:hover,
+.woocommerce input.button:hover,
+.woocommerce #respond input#submit:hover {
+  background: var(--ink);
+  color: #ffffff;
+}
+.woocommerce-message,
+.woocommerce-info,
+.woocommerce-error {
+  border-radius: 10px;
+  border-top: none;
+}
+.woocommerce table.shop_table {
+  border-radius: 10px;
+  overflow: hidden;
 }

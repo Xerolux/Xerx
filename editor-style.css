@@ -1,15 +1,20 @@
 @charset "UTF-8";
 :root {
-  --surface: #eaeaea;
-  --ink: #000000;
+  --surface: #fcfbf9;
+  --surface-alt: #f4efea;
+  --ink: #1d1d1b;
+  --accent: #6d3f3e;
+  --accent-cool: #355478;
+  --focus-ring: #1d4e89;
   --ghost: rgba( 255, 255, 255, 0.2 );
-  --mist: rgba( 255, 255, 255, 0.4 );
+  --mist: rgba( 29, 29, 27, 0.08 );
   --type-body: 'IBM Plex Serif', 'Garamond', 'Georgia', serif;
   --type-sans: 'IBM Plex Sans', 'Helvetica Neue', 'Helvetica', 'Nimbus Sans L', 'Arial', sans-serif;
   --type-heading: 'IBM Plex Sans Condensed', 'Roboto Condensed', 'HelveticaNeue-CondensedBold', 'Tahoma', sans-serif;
   --type-mono: 'IBM Plex Mono', 'Monaco', 'Consolas', monospace;
-  --measure: 640px;
-  --measure-lg: 960px;
+  --measure: 680px;
+  --measure-lg: 1120px;
+  --leading: 1.72;
   --speed: 333ms;
 }
 
@@ -24,17 +29,17 @@
 }
 
 a {
-  color: var(--ink);
+  color: var(--accent);
   transition: color var(--speed) ease, background-color var(--speed) ease;
 }
+a:hover {
+  color: var(--accent-cool);
+}
 a:focus {
-  background: var(--ink);
-  color: var(--surface);
-  outline: none;
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
   text-decoration: none;
-  border-radius: 2px;
-  padding: 0 2px;
-  margin: 0 -2px;
+  border-radius: 3px;
 }
 
 h1,
@@ -79,7 +84,7 @@ html {
   font-family: var(--type-body);
   overflow-wrap: break-all;
   font-size: 18px;
-  line-height: 1.5rem;
+  line-height: var(--leading);
   background: var(--surface);
   color: var(--ink);
   transition: background-color var(--speed) ease, color var(--speed) ease;

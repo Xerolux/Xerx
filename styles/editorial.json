@@ -1,0 +1,46 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "title": "Editorial",
+  "styles": {
+    "color": {
+      "background": "#FAF7F2",
+      "text": "#1D1D1B"
+    },
+    "typography": {
+      "lineHeight": "1.78",
+      "letterSpacing": "0.003em"
+    },
+    "elements": {
+      "h1": {
+        "typography": {
+          "fontSize": "clamp(2.4rem, 5.2vw, 5rem)",
+          "letterSpacing": "-0.02em"
+        }
+      },
+      "link": {
+        "color": {
+          "text": "#6D3F3E"
+        }
+      },
+      "button": {
+        "color": {
+          "background": "#6D3F3E",
+          "text": "#FFFFFF"
+        }
+      }
+    },
+    "blocks": {
+      "core/group": {
+        "border": {
+          "radius": "14px"
+        }
+      },
+      "core/quote": {
+        "border": {
+          "color": "#6D3F3E"
+        }
+      }
+    }
+  }
+}

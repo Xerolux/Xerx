@@ -24,7 +24,7 @@ function xerx_customize_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'header_bgcolor',
 		array(
-			'default'           => '#eaeaea',
+			'default'           => '#fcfbf9',
 			'transport'         => 'postMessage',
 			'sanitize_callback' => 'sanitize_hex_color',
 		)
@@ -46,7 +46,7 @@ function xerx_customize_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'fgcolor',
 		array(
-			'default'           => '#000000',
+			'default'           => '#1d1d1b',
 			'transport'         => 'postMessage',
 			'sanitize_callback' => 'sanitize_hex_color',
 		)
@@ -223,7 +223,7 @@ function xerx_customize_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'line_height',
 		array(
-			'default'           => '1.6',
+			'default'           => '1.72',
 			'sanitize_callback' => 'xerx_sanitize_float',
 		)
 	);
@@ -287,6 +287,50 @@ function xerx_customize_register( $wp_customize ) {
 		array(
 			'default'           => '1',
 			'sanitize_callback' => 'xerx_sanitize_checkbox',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'google_font_display',
+		array(
+			'default'           => 'swap',
+			'sanitize_callback' => 'xerx_sanitize_font_display',
+		)
+	);
+
+	$wp_customize->add_control(
+		'google_font_display',
+		array(
+			'type'        => 'select',
+			'section'     => 'typography',
+			'label'       => __( 'Google Fonts display strategy', 'xerx' ),
+			'description' => __( 'Choose how remote fonts are rendered while loading. Optional is often best for performance.', 'xerx' ),
+			'priority'    => 6,
+			'choices'     => array(
+				'swap'     => __( 'Swap', 'xerx' ),
+				'optional' => __( 'Optional', 'xerx' ),
+				'fallback' => __( 'Fallback', 'xerx' ),
+				'block'    => __( 'Block', 'xerx' ),
+			),
+		)
+	);
+
+	$wp_customize->add_setting(
+		'font_preconnect',
+		array(
+			'default'           => '1',
+			'sanitize_callback' => 'xerx_sanitize_checkbox',
+		)
+	);
+
+	$wp_customize->add_control(
+		'font_preconnect',
+		array(
+			'type'        => 'checkbox',
+			'section'     => 'typography',
+			'label'       => __( 'Enable font preconnect hints', 'xerx' ),
+			'description' => __( 'Adds preconnect hints for Google Fonts hosts to improve loading speed.', 'xerx' ),
+			'priority'    => 7,
 		)
 	);
 
@@ -439,6 +483,14 @@ function xerx_sanitize_float( $input ) {
 	return (string) $value;
 }
 
+function xerx_sanitize_font_display( $input ) {
+	$allowed = array( 'swap', 'optional', 'fallback', 'block' );
+	if ( in_array( $input, $allowed, true ) ) {
+		return $input;
+	}
+	return 'swap';
+}
+
 function xerx_sanitize_font( $input, $setting = null ) {
 	$choices    = xerx_get_fonts();
 	$setting_id = isset( $setting->id ) ? $setting->id : '';
@@ -451,10 +503,10 @@ function xerx_sanitize_font( $input, $setting = null ) {
 }
 
 function xerx_output_customizer_css() {
-	$header_bg      = sanitize_hex_color( get_theme_mod( 'header_bgcolor', '#eaeaea' ) ) ?: '#eaeaea';
-	$fg_color       = sanitize_hex_color( get_theme_mod( 'fgcolor', '#000000' ) ) ?: '#000000';
+	$header_bg      = sanitize_hex_color( get_theme_mod( 'header_bgcolor', '#fcfbf9' ) ) ?: '#fcfbf9';
+	$fg_color       = sanitize_hex_color( get_theme_mod( 'fgcolor', '#1d1d1b' ) ) ?: '#1d1d1b';
 	$content_width  = min( 1200, max( 400, absint( get_theme_mod( 'content_width', 680 ) ) ) );
-	$line_height    = xerx_sanitize_float( get_theme_mod( 'line_height', 1.6 ) );
+	$line_height    = xerx_sanitize_float( get_theme_mod( 'line_height', 1.72 ) );
 	$font_size_base = min( 24, max( 14, absint( get_theme_mod( 'font_size_base', 18 ) ) ) );
 	$mono_font      = xerx_sanitize_font( get_theme_mod( 'mono_font',     'IBM Plex Mono' ),             (object) array( 'id' => 'mono_font' ) );
 	$heading_font   = xerx_sanitize_font( get_theme_mod( 'heading_font',  'IBM Plex Sans Condensed' ),   (object) array( 'id' => 'heading_font' ) );
@@ -467,6 +519,7 @@ function xerx_output_customizer_css() {
 			--surface: <?php echo esc_attr( $header_bg ); ?>;
 			--ink: <?php echo esc_attr( $fg_color ); ?>;
 			--measure: <?php echo esc_attr( $content_width ); ?>px;
+			--measure-lg: <?php echo esc_attr( min( 1440, $content_width + 440 ) ); ?>px;
 			--leading: <?php echo esc_attr( $line_height ); ?>;
 			--type-size: <?php echo esc_attr( $font_size_base ); ?>px;
 			--type-mono: "<?php echo esc_attr( $mono_font ); ?>", "Monaco", "Consolas", monospace;
@@ -510,10 +563,10 @@ function xerx_output_editor_css() {
 	$heading_font   = xerx_sanitize_font( get_theme_mod( 'heading_font', 'IBM Plex Sans Condensed' ), (object) array( 'id' => 'heading_font' ) );
 	$body_font      = xerx_sanitize_font( get_theme_mod( 'body_font', 'IBM Plex Serif' ), (object) array( 'id' => 'body_font' ) );
 	$body_alt_font  = xerx_sanitize_font( get_theme_mod( 'body_alt_font', 'IBM Plex Sans' ), (object) array( 'id' => 'body_alt_font' ) );
-	$header_bg      = sanitize_hex_color( get_theme_mod( 'header_bgcolor', '#eaeaea' ) );
-	$fg_color       = sanitize_hex_color( get_theme_mod( 'fgcolor', '#000000' ) );
+	$header_bg      = sanitize_hex_color( get_theme_mod( 'header_bgcolor', '#fcfbf9' ) );
+	$fg_color       = sanitize_hex_color( get_theme_mod( 'fgcolor', '#1d1d1b' ) );
 	$content_width  = min( 1200, max( 400, absint( get_theme_mod( 'content_width', 680 ) ) ) );
-	$line_height    = xerx_sanitize_float( get_theme_mod( 'line_height', 1.6 ) );
+	$line_height    = xerx_sanitize_float( get_theme_mod( 'line_height', 1.72 ) );
 	$font_size_base = min( 24, max( 14, absint( get_theme_mod( 'font_size_base', 18 ) ) ) );
 	$css            = '';
 	$google_fonts   = xerx_get_font_url();
@@ -535,6 +588,7 @@ function xerx_output_editor_css() {
 		'--surface:' . $header_bg . ';' .
 		'--ink:' . $fg_color . ';' .
 		'--measure:' . $content_width . 'px;' .
+		'--measure-lg:' . min( 1440, $content_width + 440 ) . 'px;' .
 		'--leading:' . esc_attr( $line_height ) . ';' .
 		'--type-size:' . $font_size_base . 'px;' .
 		'--type-mono:"' . esc_attr( $mono_font ) . '","Monaco","Consolas",monospace;' .

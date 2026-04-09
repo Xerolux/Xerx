@@ -30,7 +30,7 @@ if ( ! function_exists( 'xerx_setup' ) ) :
 
 		add_theme_support(
 			'custom-background',
-			array( 'default-color' => 'ffffff' )
+			array( 'default-color' => 'fcfbf9' )
 		);
 
 		add_theme_support(
@@ -46,6 +46,12 @@ if ( ! function_exists( 'xerx_setup' ) ) :
 		add_theme_support(
 			'editor-color-palette',
 			array(
+				array( 'name' => esc_html__( 'Surface',    'xerx' ), 'slug' => 'surface',    'color' => '#FCFBF9' ),
+				array( 'name' => esc_html__( 'Surface Alt','xerx' ), 'slug' => 'surface-alt','color' => '#F4EFEA' ),
+				array( 'name' => esc_html__( 'Text',       'xerx' ), 'slug' => 'text',       'color' => '#1D1D1B' ),
+				array( 'name' => esc_html__( 'Muted',      'xerx' ), 'slug' => 'muted',      'color' => '#5C5A56' ),
+				array( 'name' => esc_html__( 'Accent',     'xerx' ), 'slug' => 'accent',     'color' => '#6D3F3E' ),
+				array( 'name' => esc_html__( 'Accent Cool','xerx' ), 'slug' => 'accent-cool','color' => '#355478' ),
 				array( 'name' => esc_html__( 'Brick',      'xerx' ), 'slug' => 'brick',      'color' => '#825A58' ),
 				array( 'name' => esc_html__( 'Baby Pink',  'xerx' ), 'slug' => 'baby-pink',  'color' => '#E0BAC0' ),
 				array( 'name' => esc_html__( 'Ecru',       'xerx' ), 'slug' => 'ecru',       'color' => '#E1D9D3' ),
@@ -57,17 +63,21 @@ if ( ! function_exists( 'xerx_setup' ) ) :
 				array( 'name' => esc_html__( 'Dark Blue',  'xerx' ), 'slug' => 'dark-blue',  'color' => '#283D5D' ),
 				array( 'name' => esc_html__( 'Light Gray', 'xerx' ), 'slug' => 'light-gray', 'color' => '#eaeaea' ),
 				array( 'name' => esc_html__( 'Dark Gray',  'xerx' ), 'slug' => 'dark-gray',  'color' => '#222222' ),
+				array( 'name' => esc_html__( 'White',      'xerx' ), 'slug' => 'white',      'color' => '#ffffff' ),
+				array( 'name' => esc_html__( 'Black',      'xerx' ), 'slug' => 'black',      'color' => '#000000' ),
 			)
 		);
 
 		add_theme_support(
 			'editor-font-sizes',
 			array(
+				array( 'name' => esc_html__( 'X-Small',  'xerx' ), 'slug' => 'x-small',  'size' => 13 ),
 				array( 'name' => esc_html__( 'Small',    'xerx' ), 'slug' => 'small',    'size' => 14 ),
 				array( 'name' => esc_html__( 'Medium',   'xerx' ), 'slug' => 'medium',   'size' => 16 ),
-				array( 'name' => esc_html__( 'Large',    'xerx' ), 'slug' => 'large',    'size' => 18 ),
-				array( 'name' => esc_html__( 'X-Large',  'xerx' ), 'slug' => 'x-large',  'size' => 24 ),
-				array( 'name' => esc_html__( 'XX-Large', 'xerx' ), 'slug' => 'xx-large', 'size' => 32 ),
+				array( 'name' => esc_html__( 'Large',    'xerx' ), 'slug' => 'large',    'size' => 20 ),
+				array( 'name' => esc_html__( 'X-Large',  'xerx' ), 'slug' => 'x-large',  'size' => 28 ),
+				array( 'name' => esc_html__( 'XX-Large', 'xerx' ), 'slug' => 'xx-large', 'size' => 40 ),
+				array( 'name' => esc_html__( 'Display',  'xerx' ), 'slug' => 'display',  'size' => 60 ),
 			)
 		);
 
@@ -90,7 +100,7 @@ add_action( 'init', 'xerx_init' );
 
 function xerx_content_width() {
 	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
-	$GLOBALS['content_width'] = apply_filters( 'xerx_content_width', 640 );
+	$GLOBALS['content_width'] = apply_filters( 'xerx_content_width', 680 );
 }
 add_action( 'after_setup_theme', 'xerx_content_width', 0 );
 
@@ -152,7 +162,7 @@ function xerx_scripts() {
 add_action( 'wp_enqueue_scripts', 'xerx_scripts' );
 
 function xerx_resource_hints( $urls, $relation_type ) {
-	if ( 'preconnect' === $relation_type && xerx_get_font_url() ) {
+	if ( 'preconnect' === $relation_type && xerx_get_font_url() && get_theme_mod( 'font_preconnect', '1' ) === '1' ) {
 		$urls[] = array(
 			'href'        => 'https://fonts.googleapis.com',
 			'crossorigin' => '',
@@ -195,13 +205,17 @@ function xerx_get_font_url() {
 	$body_alt_font = str_replace( ' ', '+', sanitize_text_field( get_theme_mod( 'body_alt_font', 'IBM Plex Sans' ) ) ) . ':ital,wght@0,100;0,400;0,700;1,300;1,400';
 	$heading_font  = str_replace( ' ', '+', sanitize_text_field( get_theme_mod( 'heading_font',  'IBM Plex Sans Condensed' ) ) ) . ':wght@700';
 	$mono_font     = str_replace( ' ', '+', sanitize_text_field( get_theme_mod( 'mono_font',     'IBM Plex Mono' ) ) ) . ':wght@400';
+	$display_mode  = sanitize_key( get_theme_mod( 'google_font_display', 'swap' ) );
+	if ( ! in_array( $display_mode, array( 'swap', 'optional', 'fallback', 'block' ), true ) ) {
+		$display_mode = 'swap';
+	}
 
 	$url = esc_url_raw(
 		'https://fonts.googleapis.com/css2?family=' .
 		$mono_font . '&family=' .
 		$heading_font . '&family=' .
 		$body_font . '&family=' .
-		$body_alt_font . '&display=swap'
+		$body_alt_font . '&display=' . $display_mode
 	);
 
 	set_transient( 'xerx_google_fonts_url', $url, HOUR_IN_SECONDS );
@@ -229,5 +243,9 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 require get_template_directory() . '/inc/dark-mode.php';
 
 require get_template_directory() . '/inc/block-patterns.php';
+
+require get_template_directory() . '/inc/block-styles.php';
+
+require get_template_directory() . '/inc/woocommerce.php';
 
 require get_template_directory() . '/inc/seo.php';

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "title": "Soft",
+  "styles": {
+    "color": {
+      "background": "#F7F4EF",
+      "text": "#2A2926"
+    },
+    "typography": {
+      "lineHeight": "1.8"
+    },
+    "elements": {
+      "link": {
+        "color": {
+          "text": "#355478"
+        }
+      },
+      "button": {
+        "color": {
+          "background": "#355478",
+          "text": "#FFFFFF"
+        }
+      }
+    },
+    "blocks": {
+      "core/group": {
+        "color": {
+          "background": "#FCFBF9"
+        },
+        "border": {
+          "radius": "18px"
+        },
+        "shadow": "var(--wp--preset--shadow--subtle)"
+      },
+      "core/quote": {
+        "border": {
+          "color": "#355478"
+        }
+      }
+    }
+  }
+}
