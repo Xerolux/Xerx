@@ -100,7 +100,7 @@ add_action( 'init', 'xerx_init' );
 
 function xerx_content_width() {
 	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
-	$GLOBALS['content_width'] = apply_filters( 'xerx_content_width', 680 );
+	$GLOBALS['content_width'] = apply_filters( 'xerx_content_width', 720 );
 }
 add_action( 'after_setup_theme', 'xerx_content_width', 0 );
 
@@ -151,8 +151,10 @@ function xerx_scripts() {
 		)
 	);
 
+	wp_enqueue_style( 'xerx-jetbrains-mono', 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap', array(), null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
+
 	if ( ! is_singular() ) {
-		wp_enqueue_script( 'xerx-reveal', get_template_directory_uri() . '/js/scroll.js', array( 'jquery' ), $theme_version, true );
+		wp_enqueue_script( 'xerx-reveal', get_template_directory_uri() . '/js/scroll.js', array(), $theme_version, true );
 	}
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {

@@ -52,8 +52,8 @@
     },
     "useRootPaddingAwareAlignments": true,
     "layout": {
-      "contentSize": "680px",
-      "wideSize": "1120px"
+      "contentSize": "720px",
+      "wideSize": "1080px"
     },
     "spacing": {
       "customSpacingSize": true,
@@ -115,19 +115,19 @@
       "defaultFontSizes": false,
       "fontFamilies": [
         {
-          "name": "Body Serif",
+          "name": "Body",
           "slug": "body",
-          "fontFamily": "'IBM Plex Serif', Garamond, Georgia, serif"
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
         },
         {
-          "name": "Body Sans",
+          "name": "Sans",
           "slug": "body-alt",
-          "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif"
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
         },
         {
-          "name": "Heading Condensed",
+          "name": "Heading",
           "slug": "heading",
-          "fontFamily": "'IBM Plex Sans Condensed', 'Roboto Condensed', Tahoma, sans-serif"
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
         },
         {
           "name": "Display Serif",
@@ -137,7 +137,7 @@
         {
           "name": "Monospace",
           "slug": "mono",
-          "fontFamily": "'IBM Plex Mono', Monaco, Consolas, 'Courier New', monospace"
+          "fontFamily": "'JetBrains Mono', 'IBM Plex Mono', 'Fira Code', Consolas, monospace"
         }
       ],
       "fontSizes": [
@@ -221,7 +221,9 @@
         { "name": "Light Gray", "slug": "light-gray", "color": "#eaeaea" },
         { "name": "Dark Gray",  "slug": "dark-gray",  "color": "#222222" },
         { "name": "White",      "slug": "white",      "color": "#ffffff" },
-        { "name": "Black",      "slug": "black",      "color": "#000000" }
+        { "name": "Black",      "slug": "black",      "color": "#000000" },
+        { "name": "Indigo",     "slug": "indigo",     "color": "#6366f1" },
+        { "name": "Slate",      "slug": "slate",      "color": "#1e293b" }
       ],
       "gradients": [
         {
@@ -344,16 +346,11 @@
       },
       "link": {
         "color": {
-          "text": "var(--wp--preset--color--accent)"
-        },
-        "typography": {
-          "textDecoration": "underline",
-          "textDecorationThickness": "0.08em",
-          "textUnderlineOffset": "0.17em"
+          "text": "#6366f1"
         },
         ":hover": {
           "color": {
-            "text": "var(--wp--preset--color--dark-green)"
+            "text": "#4f46e5"
           }
         },
         ":focus": {
@@ -367,29 +364,19 @@
       },
       "button": {
         "border": {
-          "radius": "var(--wp--custom--radius--pill)"
+          "radius": "8px"
         },
         "color": {
-          "background": "var(--wp--preset--color--dark-green)",
+          "background": "#6366f1",
           "text": "var(--wp--preset--color--white)"
         },
         "typography": {
-          "fontFamily": "var(--wp--preset--font-family--body-alt)",
-          "fontSize": "var(--wp--preset--font-size--small)",
-          "fontWeight": "700",
-          "letterSpacing": "0.03em"
-        },
-        "spacing": {
-          "padding": {
-            "top": "0.65em",
-            "bottom": "0.65em",
-            "left": "1.15em",
-            "right": "1.15em"
-          }
+          "fontFamily": "var(--wp--preset--font-family--body)",
+          "fontSize": "var(--wp--preset--font-size--small)"
         },
         ":hover": {
           "color": {
-            "background": "var(--wp--preset--color--dark-blue)"
+            "background": "#4f46e5"
           }
         },
         ":focus": {
@@ -413,7 +400,11 @@
           "fontFamily": "var(--wp--preset--font-family--mono)"
         },
         "color": {
-          "background": "var(--wp--preset--color--light-gray)"
+          "background": "#1e293b",
+          "text": "#e2e8f0"
+        },
+        "border": {
+          "radius": "8px"
         },
         "spacing": {
           "padding": {
@@ -431,7 +422,7 @@
       },
       "core/quote": {
         "border": {
-          "color": "var(--wp--preset--color--accent)",
+          "color": "var(--wp--preset--color--indigo)",
           "style": "solid",
           "width": "3px"
         },
@@ -446,13 +437,13 @@
       },
       "core/pullquote": {
         "border": {
-          "color": "var(--wp--preset--color--accent)",
+          "color": "var(--wp--preset--color--indigo)",
           "style": "solid",
           "top": { "width": "2px" },
           "bottom": { "width": "2px" }
         },
         "color": {
-          "text": "var(--wp--preset--color--accent)"
+          "text": "var(--wp--preset--color--indigo)"
         },
         "typography": {
           "fontFamily": "var(--wp--preset--font-family--heading)",

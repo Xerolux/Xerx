@@ -10,15 +10,7 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'entry h-entry' ); ?>>
-	<?php
-	if ( is_singular() ) {
-		the_title( '<h1 class="entry__title entry__title--hero p-name">', '</h1>' );
-	} else {
-		the_title( '<h2 class="entry__title p-name"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
-	}
-	?>
-
-	<?php if ( 'post' === get_post_type() ) : ?>
+	<?php if ( 'post' === get_post_type() && ! is_singular() ) : ?>
 		<div class="entry__meta">
 			<?php
 			xerx_post_date();
@@ -27,14 +19,35 @@
 			xerx_post_footer();
 			?>
 		</div>
-		<?php if ( is_singular() ) : ?>
-			<div class="entry__share">
-				<?php xerx_share_links(); ?>
-			</div>
-		<?php endif; ?>
+	<?php endif; ?>
+
+	<?php
+	if ( is_singular() ) {
+		the_title( '<h1 class="entry__title entry__title--hero p-name">', '</h1>' );
+	} else {
+		the_title( '<h2 class="entry__title p-name"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
+	}
+	?>
+
+	<?php if ( 'post' === get_post_type() && is_singular() ) : ?>
+		<div class="entry__meta">
+			<?php
+			xerx_post_date();
+			xerx_read_time();
+			xerx_post_author();
+			xerx_post_footer();
+			?>
+		</div>
+		<div class="entry__share">
+			<?php xerx_share_links(); ?>
+		</div>
 	<?php endif; ?>
 
 	<?php xerx_featured_image(); ?>
+
+	<?php if ( is_singular() ) : ?>
+		<div class="toc" id="xerx-toc" style="display: none;"></div>
+	<?php endif; ?>
 
 	<div class="entry__body e-content">
 		<?php

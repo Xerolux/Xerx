@@ -14,6 +14,7 @@
 					array(
 						'theme_location' => 'footer-menu',
 						'menu_id'        => 'footer-menu',
+						'menu_class'     => 'nav-menu',
 						'depth'          => 1,
 						'fallback_cb'    => false,
 					)

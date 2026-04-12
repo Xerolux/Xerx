@@ -12,7 +12,7 @@ function xerx_custom_header_setup() {
 			'xerx_custom_header_args',
 			array(
 				'default-image'      => '',
-				'default-text-color' => '000000',
+				'default-text-color' => '1a1a2e',
 				'flex-width'         => true,
 				'flex-height'        => true,
 				'wp-head-callback'   => 'xerx_header_style',
@@ -34,20 +34,16 @@ if ( ! function_exists( 'xerx_header_style' ) ) :
 		<?php
 		if ( ! display_header_text() ) :
 			?>
-			.banner__title,
-			.banner__tagline,
-			.navbar__title,
-			.navbar__tagline {
+			.site-header__brand,
+			.banner__title {
 				position: absolute;
 				clip: rect(1px, 1px, 1px, 1px);
 			}
 			<?php
 			else :
 				?>
-			.banner__title a,
-			.banner__tagline,
-			.navbar__title a,
-			.navbar__tagline {
+			.site-header__brand,
+			.banner__title a {
 				color: #<?php echo esc_attr( $header_text_color ); ?>;
 			}
 		<?php endif; ?>

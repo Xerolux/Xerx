@@ -24,7 +24,7 @@ function xerx_customize_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'header_bgcolor',
 		array(
-			'default'           => '#fcfbf9',
+			'default'           => '#f8f9fb',
 			'transport'         => 'postMessage',
 			'sanitize_callback' => 'sanitize_hex_color',
 		)
@@ -46,7 +46,7 @@ function xerx_customize_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'fgcolor',
 		array(
-			'default'           => '#1d1d1b',
+			'default'           => '#1a1a2e',
 			'transport'         => 'postMessage',
 			'sanitize_callback' => 'sanitize_hex_color',
 		)
@@ -96,7 +96,7 @@ function xerx_customize_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'dark_mode_background',
 		array(
-			'default'           => '#222222',
+			'default'           => '#0f172a',
 			'sanitize_callback' => 'sanitize_hex_color',
 		)
 	);
@@ -116,7 +116,7 @@ function xerx_customize_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'dark_mode_text',
 		array(
-			'default'           => '#bdc3c7',
+			'default'           => '#e2e8f0',
 			'sanitize_callback' => 'sanitize_hex_color',
 		)
 	);
@@ -196,7 +196,7 @@ function xerx_customize_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'content_width',
 		array(
-			'default'           => '680',
+			'default'           => '720',
 			'sanitize_callback' => 'absint',
 		)
 	);
@@ -223,7 +223,7 @@ function xerx_customize_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'line_height',
 		array(
-			'default'           => '1.72',
+			'default'           => '1.7',
 			'sanitize_callback' => 'xerx_sanitize_float',
 		)
 	);
@@ -250,7 +250,7 @@ function xerx_customize_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'font_size_base',
 		array(
-			'default'           => '18',
+			'default'           => '16',
 			'sanitize_callback' => 'absint',
 		)
 	);
@@ -476,7 +476,7 @@ function xerx_sanitize_float( $input ) {
 	$value = filter_var( $input, FILTER_VALIDATE_FLOAT );
 
 	if ( false === $value ) {
-		return '1.6';
+		return '1.7';
 	}
 
 	$value = max( 1, min( 2.5, $value ) );
@@ -503,11 +503,11 @@ function xerx_sanitize_font( $input, $setting = null ) {
 }
 
 function xerx_output_customizer_css() {
-	$header_bg      = sanitize_hex_color( get_theme_mod( 'header_bgcolor', '#fcfbf9' ) ) ?: '#fcfbf9';
-	$fg_color       = sanitize_hex_color( get_theme_mod( 'fgcolor', '#1d1d1b' ) ) ?: '#1d1d1b';
-	$content_width  = min( 1200, max( 400, absint( get_theme_mod( 'content_width', 680 ) ) ) );
-	$line_height    = xerx_sanitize_float( get_theme_mod( 'line_height', 1.72 ) );
-	$font_size_base = min( 24, max( 14, absint( get_theme_mod( 'font_size_base', 18 ) ) ) );
+	$header_bg      = sanitize_hex_color( get_theme_mod( 'header_bgcolor', '#f8f9fb' ) ) ?: '#f8f9fb';
+	$fg_color       = sanitize_hex_color( get_theme_mod( 'fgcolor', '#1a1a2e' ) ) ?: '#1a1a2e';
+	$content_width  = min( 1200, max( 400, absint( get_theme_mod( 'content_width', 720 ) ) ) );
+	$line_height    = xerx_sanitize_float( get_theme_mod( 'line_height', 1.7 ) );
+	$font_size_base = min( 24, max( 14, absint( get_theme_mod( 'font_size_base', 16 ) ) ) );
 	$mono_font      = xerx_sanitize_font( get_theme_mod( 'mono_font',     'IBM Plex Mono' ),             (object) array( 'id' => 'mono_font' ) );
 	$heading_font   = xerx_sanitize_font( get_theme_mod( 'heading_font',  'IBM Plex Sans Condensed' ),   (object) array( 'id' => 'heading_font' ) );
 	$body_font      = xerx_sanitize_font( get_theme_mod( 'body_font',     'IBM Plex Serif' ),            (object) array( 'id' => 'body_font' ) );
@@ -522,35 +522,28 @@ function xerx_output_customizer_css() {
 			--measure-lg: <?php echo esc_attr( min( 1440, $content_width + 440 ) ); ?>px;
 			--leading: <?php echo esc_attr( $line_height ); ?>;
 			--type-size: <?php echo esc_attr( $font_size_base ); ?>px;
-			--type-mono: "<?php echo esc_attr( $mono_font ); ?>", "Monaco", "Consolas", monospace;
-			--type-heading: "<?php echo esc_attr( $heading_font ); ?>", "Roboto Condensed", "HelveticaNeue-CondensedBold", "Tahoma", sans-serif;
-			--type-body: "<?php echo esc_attr( $body_font ); ?>", "Garamond", "Georgia", serif;
-			--type-sans: "<?php echo esc_attr( $body_alt_font ); ?>", "Helvetica Neue", "Helvetica", "Nimbus Sans L", "Arial", sans-serif;
+			--type-mono: "<?php echo esc_attr( $mono_font ); ?>", "JetBrains Mono", "Fira Code", "Consolas", monospace;
+			--type-heading: "Inter", "<?php echo esc_attr( $heading_font ); ?>", -apple-system, sans-serif;
+			--type-body: "Inter", "<?php echo esc_attr( $body_font ); ?>", -apple-system, sans-serif;
+			--type-sans: "Inter", "<?php echo esc_attr( $body_alt_font ); ?>", -apple-system, sans-serif;
 		}
-		.banner { background-color: var(--surface); }
-		.main-wrap { max-width: var(--measure); margin: 0 auto; padding: 0 20px; }
 		body { line-height: var(--leading); font-size: var(--type-size); }
 		<?php if ( get_theme_mod( 'enable_darkmode' ) === '1' ) : ?>
 		<?php
-		$dark_bg   = sanitize_hex_color( get_theme_mod( 'dark_mode_background', '#222222' ) ) ?: '#222222';
-		$dark_text = sanitize_hex_color( get_theme_mod( 'dark_mode_text', '#bdc3c7' ) ) ?: '#bdc3c7';
-		$dark_hdr  = xerx_shift_color( $dark_bg, 10 );
+		$dark_bg   = sanitize_hex_color( get_theme_mod( 'dark_mode_background', '#0f172a' ) ) ?: '#0f172a';
+		$dark_text = sanitize_hex_color( get_theme_mod( 'dark_mode_text', '#e2e8f0' ) ) ?: '#e2e8f0';
 		?>
 		:root.dark-mode {
 			--surface: <?php echo esc_attr( $dark_bg ); ?>;
 			--ink: <?php echo esc_attr( $dark_text ); ?>;
-			--banner-bg: <?php echo esc_attr( $dark_hdr ); ?>;
 		}
 		:root.dark-mode body.custom-background { background-color: var(--surface) !important; }
-		:root.dark-mode .banner { background-color: var(--banner-bg) !important; }
 		@media (prefers-color-scheme: dark) {
 			:root:not(.light-mode) {
 				--surface: <?php echo esc_attr( $dark_bg ); ?>;
 				--ink: <?php echo esc_attr( $dark_text ); ?>;
-				--banner-bg: <?php echo esc_attr( $dark_hdr ); ?>;
 			}
 			:root:not(.light-mode) body.custom-background { background-color: var(--surface) !important; }
-			:root:not(.light-mode) .banner { background-color: var(--banner-bg) !important; }
 		}
 		<?php endif; ?>
 	</style>
