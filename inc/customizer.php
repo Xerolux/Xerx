@@ -64,6 +64,48 @@ function xerx_customize_register( $wp_customize ) {
 		)
 	);
 
+	$wp_customize->add_setting(
+		'button_color',
+		array(
+			'default'           => '#6366f1',
+			'transport'         => 'postMessage',
+			'sanitize_callback' => 'sanitize_hex_color',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'button_color',
+			array(
+				'label'    => __( 'Primary Button Color', 'xerx' ),
+				'section'  => 'colors',
+				'settings' => 'button_color',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'link_color',
+		array(
+			'default'           => '#6366f1',
+			'transport'         => 'postMessage',
+			'sanitize_callback' => 'sanitize_hex_color',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'link_color',
+			array(
+				'label'    => __( 'Link Color', 'xerx' ),
+				'section'  => 'colors',
+				'settings' => 'link_color',
+			)
+		)
+	);
+
 	$wp_customize->add_section(
 		'dark_mode',
 		array(
@@ -505,6 +547,8 @@ function xerx_sanitize_font( $input, $setting = null ) {
 function xerx_output_customizer_css() {
 	$header_bg      = sanitize_hex_color( get_theme_mod( 'header_bgcolor', '#f8f9fb' ) ) ?: '#f8f9fb';
 	$fg_color       = sanitize_hex_color( get_theme_mod( 'fgcolor', '#1a1a2e' ) ) ?: '#1a1a2e';
+	$button_color   = sanitize_hex_color( get_theme_mod( 'button_color', '#6366f1' ) ) ?: '#6366f1';
+	$link_color     = sanitize_hex_color( get_theme_mod( 'link_color', '#6366f1' ) ) ?: '#6366f1';
 	$content_width  = min( 1200, max( 400, absint( get_theme_mod( 'content_width', 720 ) ) ) );
 	$line_height    = xerx_sanitize_float( get_theme_mod( 'line_height', 1.7 ) );
 	$font_size_base = min( 24, max( 14, absint( get_theme_mod( 'font_size_base', 16 ) ) ) );
@@ -518,6 +562,8 @@ function xerx_output_customizer_css() {
 		:root {
 			--surface: <?php echo esc_attr( $header_bg ); ?>;
 			--ink: <?php echo esc_attr( $fg_color ); ?>;
+			--accent: <?php echo esc_attr( $link_color ); ?>;
+			--btn-bg: <?php echo esc_attr( $button_color ); ?>;
 			--measure: <?php echo esc_attr( $content_width ); ?>px;
 			--measure-lg: <?php echo esc_attr( min( 1440, $content_width + 440 ) ); ?>px;
 			--leading: <?php echo esc_attr( $line_height ); ?>;

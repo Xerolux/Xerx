@@ -6,7 +6,7 @@ Author: Xerolux
 Author URI: https://github.com/Xerolux
 Description: A clean and minimal WordPress theme for documenting your stream of life
 Version: 1.0.0
-Tested up to: 7.0
+Tested up to: 7.x
 Requires PHP: 7.4
 License: GNU General Public License v3 or later
 License URI: LICENSE
@@ -28,6 +28,7 @@ This theme, like WordPress, is licensed under the GPL.
   --ink-light: #64748b;
   --ink-faint: #94a3b8;
   --accent: #6366f1;
+  --btn-bg: #6366f1;
   --accent-hover: #4f46e5;
   --accent-subtle: rgba(99, 102, 241, 0.08);
   --border: #e2e8f0;
@@ -219,6 +220,41 @@ a:focus-visible {
   .site-header__tagline {
     display: inline;
   }
+}
+
+/* ---- Top Bar Navigation ---- */
+.site-top-bar {
+  background: var(--ink);
+  color: var(--surface);
+  font-family: var(--type-sans);
+  font-size: 0.8rem;
+}
+
+.site-top-bar__inner {
+  max-width: var(--measure-full);
+  margin: 0 auto;
+  padding: 8px 24px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.top-bar-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 16px;
+}
+
+.top-bar-nav a {
+  color: var(--surface-sunken);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--speed) ease;
+}
+
+.top-bar-nav a:hover {
+  color: #fff;
 }
 
 /* ---- Primary Navigation ---- */
@@ -1170,7 +1206,7 @@ a:focus-visible {
 
 /* ---- Buttons ---- */
 .entry__body .wp-block-button__link {
-  background-color: var(--accent);
+  background-color: var(--btn-bg);
   color: #fff;
   border-radius: var(--radius);
   font-family: var(--type-sans);
@@ -1180,20 +1216,17 @@ a:focus-visible {
   transition: background-color var(--speed) ease;
 }
 .entry__body .wp-block-button__link:hover {
-  background-color: var(--accent-hover);
-  text-decoration: none;
-}
-.entry__body .wp-block-button__link:hover {
   background-color: var(--ink);
+  text-decoration: none;
 }
 .entry__body .is-style-outline .wp-block-button__link {
   border-radius: var(--radius);
-  border: 2px solid var(--accent);
+  border: 2px solid var(--btn-bg);
   background: transparent;
-  color: var(--accent);
+  color: var(--btn-bg);
 }
 .entry__body .is-style-outline .wp-block-button__link:hover {
-  background: var(--accent);
+  background: var(--btn-bg);
   color: #fff;
 }
 .entry__body .is-style-squared .wp-block-button__link {

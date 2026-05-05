@@ -3,7 +3,7 @@ Contributors: xerolux
 Tags: blog, one-column, custom-background, custom-colors, custom-header, custom-logo, custom-menu, featured-images, flexible-header, footer-widgets, sticky-post, theme-options, translation-ready, block-styles, wide-blocks, editor-style, portfolio
 Requires PHP: 7.4
 Requires at least: 6.4
-Tested up to: 7.0
+Tested up to: 7.x
 Stable tag: 1.0.0
 License: GNU General Public License v3 or later
 License URI: LICENSE
