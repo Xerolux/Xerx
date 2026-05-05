@@ -83,8 +83,9 @@ if ( ! function_exists( 'xerx_setup' ) ) :
 
 		register_nav_menus(
 			array(
-				'header-menu' => esc_html__( 'Primary', 'xerx' ),
-				'footer-menu' => esc_html__( 'Footer', 'xerx' ),
+				'top-bar-menu' => esc_html__( 'Top Bar', 'xerx' ),
+				'header-menu'  => esc_html__( 'Primary', 'xerx' ),
+				'footer-menu'  => esc_html__( 'Footer', 'xerx' ),
 			)
 		);
 	}
