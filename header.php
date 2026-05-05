@@ -28,6 +28,24 @@
 <div id="page" class="page-shell">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'xerx' ); ?></a>
 
+	<?php if ( has_nav_menu( 'top-bar-menu' ) ) : ?>
+		<div class="site-top-bar" role="navigation" aria-label="<?php esc_attr_e( 'Top Bar Navigation', 'xerx' ); ?>">
+			<div class="site-top-bar__inner">
+				<?php
+				wp_nav_menu(
+					array(
+						'theme_location' => 'top-bar-menu',
+						'menu_id'        => 'top-bar-menu',
+						'menu_class'     => 'top-bar-nav',
+						'depth'          => 1,
+						'fallback_cb'    => false,
+					)
+				);
+				?>
+			</div>
+		</div>
+	<?php endif; ?>
+
 	<header class="site-header" role="banner">
 		<div class="site-header__inner">
 			<a class="site-header__brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
