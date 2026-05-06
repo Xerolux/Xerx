@@ -4,7 +4,7 @@ Tags: blog, one-column, custom-background, custom-colors, custom-header, custom-
 Requires PHP: 7.4
 Requires at least: 6.4
 Tested up to: 7.x
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GNU General Public License v3 or later
 License URI: LICENSE
 
@@ -15,6 +15,9 @@ A clean and minimal WordPress theme for documenting your stream of life.
 Xerx is a minimal yet extensive WordPress theme. It has different styles for post types and allows you to customize colors, typography, spacing and images. It supports the block editor with custom block patterns, dark mode, SEO enhancements, breadcrumbs, social sharing, reading time estimates, related posts, and portfolio layouts via Jetpack.
 
 == Changelog ==
+
+== 1.0.1 ==
+* Update theme version
 
 == 1.0.0 ==
 * Initial release of Xerx theme

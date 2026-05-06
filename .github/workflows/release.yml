@@ -1,0 +1,33 @@
+name: Create Theme Release ZIP
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    name: Build Installable Theme ZIP
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Prepare Theme Folder
+        run: |
+          # Create a temporary directory named after the theme
+          mkdir xerx
+
+          # Copy all files to the temporary directory, excluding development and hidden files
+          rsync -av --progress ./ xerx/ --exclude xerx --exclude .git --exclude .github --exclude jest.config.js --exclude README.md
+
+          # Create the zip file containing the theme folder
+          zip -r xerx.zip xerx/
+
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: xerx.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
